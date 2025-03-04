@@ -1,0 +1,69 @@
+table 'Territory Lookup'
+	excludeFromModelRefresh
+	lineageTag: 806e0f0d-566e-47e8-9903-0cd35fade7e4
+
+	column SalesTerritoryKey
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: ee91ae40-4610-46db-8ea8-7f724adf31f5
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: ecc34e7d-34c6-443b-9a51-e2159788e348
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: e0271079-3bf9-4b4c-949d-5d5ed704f862
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		lineageTag: 36c0324f-d43a-4b64-ae4f-40e0b4cb53ec
+		dataCategory: Continent
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Territory Hierarchy'
+		lineageTag: 90953032-cdfe-4ca0-b803-688aa082798d
+
+		level Continent
+			lineageTag: fce9533e-0e41-4509-9b08-8366e7ab782b
+			column: Continent
+
+		level Country
+			lineageTag: 207048cc-d822-4330-a9f9-5ee34b7c8887
+			column: Country
+
+		level Region
+			lineageTag: 951acf73-a8dc-4276-b20d-13c9b560f8a5
+			column: Region
+
+	partition 'Territory Lookup' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\messe\OneDrive\Desktop\Microsoft Power BI Desktop for Business Intelligence\AdventureWorks Raw Data\AdventureWorks Territory Lookup.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SalesTerritoryKey", Int64.Type}, {"Region", type text}, {"Country", type text}, {"Continent", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

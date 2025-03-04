@@ -1,0 +1,48 @@
+table 'Product Subcategories Lookup'
+	excludeFromModelRefresh
+	lineageTag: befde01c-fbce-441c-bfa4-58bb257fc788
+
+	column ProductSubcategoryKey
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: 2bd2a9de-d086-424c-8e12-e7882708d3cb
+		summarizeBy: none
+		sourceColumn: ProductSubcategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubcategoryName
+		dataType: string
+		lineageTag: d0d88ad8-c910-456b-a1c6-e097ef8c2c24
+		summarizeBy: none
+		sourceColumn: SubcategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductCategoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6bd90423-daf7-4e76-936a-03eb67c53545
+		summarizeBy: none
+		sourceColumn: ProductCategoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Product Subcategories Lookup' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\messe\OneDrive\Desktop\Microsoft Power BI Desktop for Business Intelligence\AdventureWorks Raw Data\AdventureWorks Product Subcategories Lookup.csv"),[Delimiter=",", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ProductSubcategoryKey", Int64.Type}, {"SubcategoryName", type text}, {"ProductCategoryKey", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

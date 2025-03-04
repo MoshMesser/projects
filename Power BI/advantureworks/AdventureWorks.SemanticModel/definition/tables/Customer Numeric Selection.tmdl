@@ -1,0 +1,48 @@
+table 'Customer Numeric Selection'
+	lineageTag: 8a6d2755-2ee9-4b1a-a36a-860a7d25de21
+
+	column 'Customer Numeric Selection'
+		lineageTag: 5a6d2e2f-2c98-4676-8442-5c190493b855
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Customer Numeric Selection Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Customer Numeric Selection Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Numeric Selection Fields'
+		isHidden
+		lineageTag: ed588f4d-376b-4e4a-9a74-61ab28f05a1f
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Customer Numeric Selection Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Numeric Selection Order'
+		isHidden
+		formatString: 0
+		lineageTag: dfbfd067-6e55-4df1-a725-c56c146563c6
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Customer Numeric Selection' = calculated
+		mode: import
+		source =
+				{
+				    ("Total Customers", NAMEOF('Measure Table'[Total Customers]), 0),
+				    ("Revenue per Customer", NAMEOF('Measure Table'[Average Revenue per Customer]), 1)
+				}
+
+	annotation PBI_Id = 1685b01f91fa4455930a2e6ca620dfc9
+
