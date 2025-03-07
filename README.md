@@ -18,7 +18,7 @@ Designed and implemented a scalable data transformation pipeline using **dbt (Da
 ## Project 2: Interactive Business Insights Dashboard with Power BI
 
 **Description:**  
-Built a dynamic Power BI dashboard to track and analyze key business performance metrics. Integrated data from multiple sources, including SQL databases, APIs, and Excel, and designed an optimized data model with sophisticated DAX calculations for complex aggregations. Developed interactive visualizations and clear KPIs to provide actionable insights, enabling stakeholders to identify trends and make informed decisions quickly. The dashboard significantly improved reporting efficiency and business decision-making.
+Built a dynamic Power BI dashboard to track and analyze key business performance metrics. Integrated data from Excel, and designed an optimized data model with sophisticated DAX calculations for complex aggregations. Developed interactive visualizations and clear KPIs to provide actionable insights, enabling stakeholders to identify trends and make informed decisions quickly. The dashboard significantly improved reporting efficiency and business decision-making.
 
 **Key Technologies:**
 - Power BI
