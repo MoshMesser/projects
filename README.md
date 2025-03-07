@@ -23,6 +23,4 @@ Built a dynamic Power BI dashboard to track and analyze key business performance
 **Key Technologies:**
 - Power BI
 - DAX
-- SQL
-- APIs
 - Excel
